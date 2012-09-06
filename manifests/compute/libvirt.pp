@@ -1,7 +1,7 @@
 class nova::compute::libvirt (
   $libvirt_type = 'kvm',
   $vncserver_listen = '127.0.0.1',
-  $block_migration = true,
+  $block_migration = false,
 ) {
 
   include nova::params

@@ -1,16 +1,17 @@
 #schedulee this class should probably never be declared except
 # from the virtualization implementation of the compute node
 class nova::compute(
-  $enabled                       = false,
-  $ensure_package                = 'present',
-  $vnc_enabled                   = true,
-  $vncserver_proxyclient_address = '127.0.0.1',
-  $vncproxy_host                 = false,
-  $vncproxy_protocol             = 'http',
-  $vncproxy_port                 = '6080',
-  $vncproxy_path                 = '/vnc_auto.html',
-  $virtio_nic                    = false,
-  $block_migration               = false
+  $enabled                              = false,
+  $ensure_package                       = 'present',
+  $vnc_enabled                          = true,
+  $vncserver_proxyclient_address        = '127.0.0.1',
+  $vncproxy_host                        = false,
+  $vncproxy_protocol                    = 'http',
+  $vncproxy_port                        = '6080',
+  $vncproxy_path                        = '/vnc_auto.html',
+  $virtio_nic                           = false,
+  $hard_reboot_guest_on_service_restart = false,
+  $resume_guests_state_on_host_boot     = true,
  ) {
 
   include nova::params
@@ -50,5 +51,6 @@ class nova::compute(
     # Enable the virtio network card for instances
     nova_config { 'libvirt_use_virtio_for_bridges': value => 'True' }
   }
-
+  nova_config { 'start_guests_on_host_boot': value        => $hard_reboot_guest_on_service_restart }
+  nova_config { 'resume_guests_state_on_host_boot': value => $resume_guests_state_on_host_boot }
 }
