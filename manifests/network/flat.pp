@@ -6,7 +6,7 @@ class nova::network::flat (
   $flat_interface,
   $fixed_range,
   $public_interface   = undef,
-  $flat_network_bridge = $flat_interface
+  $flat_network_bridge = 'br100'
 ) {
 
   if $public_interface {

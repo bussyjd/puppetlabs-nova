@@ -1,5 +1,6 @@
 class nova::compute::multi_host(
-  $enabled = false
+  $enabled = false,
+  $flat_network_bridge = br66
 ) {
 
   include nova::params
